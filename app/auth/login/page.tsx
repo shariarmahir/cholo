@@ -2,7 +2,7 @@ import LoginForm from '@/components/auth/LoginForm';
 
 export const metadata = {
   title: 'Login - Cholo',
-  description: 'Login to your Cholo account',
+  description: 'Login to your cholo account to access exclusive travel experiences and personalized recommendations.',
 };
 
 export default function LoginPage() {
