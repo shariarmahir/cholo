@@ -53,13 +53,13 @@ export default function SignupForm({ onSwitchToLogin, onClose }: SignupFormProps
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Validate passwords match
     if (formData.password !== formData.confirmPassword) {
       alert('Passwords do not match!');
       return;
     }
-    
+
     setLoading(true);
 
     try {
@@ -107,11 +107,10 @@ export default function SignupForm({ onSwitchToLogin, onClose }: SignupFormProps
               key={role.id}
               type="button"
               onClick={() => setSelectedRole(role.id)}
-              className={`p-3 rounded-xl border-2 transition-all duration-200 text-center ${
-                selectedRole === role.id
+              className={`p-3 rounded-xl border-2 transition-all duration-200 text-center ${selectedRole === role.id
                   ? 'border-[#FF6B35] bg-orange-50'
                   : 'border-gray-200 hover:border-[#0FB9C6] bg-white'
-              }`}
+                }`}
             >
               <div className="text-2xl mb-1">{role.icon}</div>
               <div className="text-xs font-semibold text-gray-900">{role.label}</div>

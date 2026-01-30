@@ -1,5 +1,6 @@
 import AuthLayout from '@/components/auth/AuthLayout';
 import LoginForm from '@/components/auth/LoginForm';
+import Image from 'next/image';
 
 export const metadata = {
   title: 'Log In - Cholo',
