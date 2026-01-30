@@ -1,5 +1,5 @@
-import AuthLayout from '@/components/AuthLayout';
-import SignupForm from '@/components/SignupForm';
+import AuthLayout from '@/components/auth/AuthLayout';
+import SignupForm from '@/components/auth/SignupForm';
 
 export const metadata = {
   title: 'Sign Up - Cholo',

@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { Search, Menu, X, User, LogIn, Facebook, Instagram, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import LoginForm from '@/components/LoginForm';
-import SignupForm from '@/components/SignupForm';
+import LoginForm from '@/components/auth/LoginForm';
+import SignupForm from '@/components/auth/SignupForm';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
