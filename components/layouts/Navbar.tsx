@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Search, Menu, X, User, LogIn, Facebook, Instagram, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { AuthDialog } from '@/components/ui/auth-dialog';
 import LoginForm from '@/components/auth/LoginForm';
 import SignupForm from '@/components/auth/SignupForm';
 
@@ -22,21 +23,25 @@ export default function Navbar() {
   ];
 
   const handleLoginClick = () => {
+    console.log('Login button clicked');
     setIsMenuOpen(false);
     setShowLoginModal(true);
   };
 
   const handleSignupClick = () => {
+    console.log('Signup button clicked');
     setIsMenuOpen(false);
     setShowSignupModal(true);
   };
 
   const switchToSignup = () => {
+    console.log('Switching to signup');
     setShowLoginModal(false);
     setShowSignupModal(true);
   };
 
   const switchToLogin = () => {
+    console.log('Switching to login');
     setShowSignupModal(false);
     setShowLoginModal(true);
   };
@@ -49,17 +54,17 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
             {/* Left: Social Icons */}
             <div className="hidden lg:flex items-center space-x-4">
-              <a
-                href="https://facebook.com"
-                target="_blank"
+              <a 
+                href="https://facebook.com" 
+                target="_blank" 
                 rel="noopener noreferrer"
                 className="text-[#248efb] hover:bg-blue-50 p-2 rounded-full transition-colors duration-200"
               >
                 <Facebook className="w-5 h-5" />
               </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
+              <a 
+                href="https://instagram.com" 
+                target="_blank" 
                 rel="noopener noreferrer"
                 className="text-[#248efb] hover:bg-pink-50 p-2 rounded-full transition-colors duration-200"
               >
@@ -70,9 +75,9 @@ export default function Navbar() {
             {/* Center: Logo */}
             <div className="absolute left-1/2 transform -translate-x-1/2">
               <div className="flex items-center justify-center cursor-pointer">
-                <img
-                  src="/logo/logo.png"
-                  alt="Cholo Logo"
+                <img 
+                  src="/logo/logo.png" 
+                  alt="Cholo Logo" 
                   className="h-12 w-auto drop-shadow-sm"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
@@ -205,17 +210,17 @@ export default function Navbar() {
               {/* Mobile Social & Language */}
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-4">
-                  <a
-                    href="https://facebook.com"
-                    target="_blank"
+                  <a 
+                    href="https://facebook.com" 
+                    target="_blank" 
                     rel="noopener noreferrer"
                     className="text-[#248efb] hover:bg-blue-50 p-2 rounded-full"
                   >
                     <Facebook className="w-5 h-5" />
                   </a>
-                  <a
-                    href="https://instagram.com"
-                    target="_blank"
+                  <a 
+                    href="https://instagram.com" 
+                    target="_blank" 
                     rel="noopener noreferrer"
                     className="text-[#248efb] hover:bg-pink-50 p-2 rounded-full"
                   >
@@ -230,15 +235,15 @@ export default function Navbar() {
 
               {/* Mobile Auth Buttons */}
               <div className="flex flex-col space-y-3">
-                <Button
+                <Button 
                   onClick={handleLoginClick}
-                  variant="outline"
+                  variant="outline" 
                   className="w-full py-3 text-[#248efb] border-2 border-[#248efb] hover:bg-blue-50 rounded-lg"
                 >
                   <LogIn className="w-4 h-4 mr-2" />
                   Login
                 </Button>
-                <Button
+                <Button 
                   onClick={handleSignupClick}
                   className="w-full py-3 bg-linear-to-r from-[#248efb] to-[#1a73e8] text-white rounded-lg shadow-sm"
                 >
@@ -251,41 +256,31 @@ export default function Navbar() {
         )}
       </nav>
 
-      {showLoginModal && (
-        <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">
-          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4 relative">
-            <button
-              onClick={() => setShowLoginModal(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
-            >
-              ×
-            </button>
-            <LoginForm
-              onSwitchToSignup={switchToSignup}
-              onClose={() => setShowLoginModal(false)}
-            />
-          </div>
-        </div>
-      )}
+      {/* Login Dialog */}
+      <AuthDialog
+        open={showLoginModal}
+        onOpenChange={setShowLoginModal}
+        title="Welcome Back"
+        description="Log in to your Cholo account"
+      >
+        <LoginForm 
+          onSwitchToSignup={switchToSignup} 
+          onClose={() => setShowLoginModal(false)} 
+        />
+      </AuthDialog>
 
-      {showSignupModal && (
-        <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center overflow-y-auto py-8">
-          <div className="bg-white rounded-lg p-6 max-w-2xl w-full mx-4 relative my-auto">
-            <button
-              onClick={() => setShowSignupModal(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 z-10"
-            >
-              ×
-            </button>
-            <div className="max-h-[85vh] overflow-y-auto pr-2 custom-scrollbar">
-              <SignupForm
-                onSwitchToLogin={switchToLogin}
-                onClose={() => setShowSignupModal(false)}
-              />
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Signup Dialog */}
+      <AuthDialog
+        open={showSignupModal}
+        onOpenChange={setShowSignupModal}
+        title="Create Account"
+        description="Join Cholo and unlock exclusive travel experiences"
+      >
+        <SignupForm 
+          onSwitchToLogin={switchToLogin} 
+          onClose={() => setShowSignupModal(false)} 
+        />
+      </AuthDialog>
     </>
   );
 }
